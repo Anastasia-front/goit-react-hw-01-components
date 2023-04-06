@@ -5,12 +5,10 @@ import PropTypes from 'prop-types';
 export const Statistics = ({ title, stats }) => {
   return (
     <section className={css.statistics}>
-      {title !== undefined ? (
+      {title && (
         <h2 className={css.title} style={{ padding: '20px' }}>
           {title}
         </h2>
-      ) : (
-        <h2 className={css.title}>{title}</h2>
       )}
 
       <ul className={css.statList}>
@@ -31,5 +29,11 @@ export const Statistics = ({ title, stats }) => {
 
 Statistics.propTypes = {
   title: PropTypes.string,
-  stats: PropTypes.arrayOf(PropTypes.object),
+  stats: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      percentage: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
+    })
+  ),
 };
